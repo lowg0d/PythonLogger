@@ -1,4 +1,3 @@
-# PythonLogger
 # PythonLogger - V2.0
 
 ### What's this !??
