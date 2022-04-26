@@ -11,9 +11,9 @@ import pytz
 
 #####################################
 
-TIME_ZONE = 'Europe/Madrid' # Your time zone or the time zone you want the logs to have .
-SAVE_LOGS = True # Select True if you want your logs to save in a folder on the script directory .
-LOG_FOLDER_NAME = "logs" # If you select true in the above option u can edit the name of the folder 
+TIME_ZONE = 'Europe/Madrid' # Your time zone or the time zone you want the logs to have.
+SAVE_LOGS = True # Select True if you want your logs to save in a folder on the script directory.
+LOG_FOLDER_NAME = "logs" # If you select true in the above option u can edit the name of the folder.
 
 DEBUG_PREFIX = 'DEBUG' 
 INFO_PREFIX = 'INFO'
@@ -28,19 +28,19 @@ date_format = "%d.%m.%y"
 time_format = "%H:%M:%S"
 time_format_folder = "%H.%M.%S"
 
-# the time of the moment when the log have been created
+# the time of the moment when the log have been created.
 log_date = datetime.now(pytz.timezone(TIME_ZONE)).strftime(date_format)
 log_time = datetime.now(pytz.timezone(TIME_ZONE)).strftime(time_format_folder)
 
 global f
 
-# if the option to save logs is activated
+# if the option to save logs is activated.
 if SAVE_LOGS:
-    # the name of the new log file
+    # the name of the new log file.
     log_name = f"log-{log_date}-{log_time}.txt"
     # create the file
     try:
-        # if the directory to save the logs doesen't, this is responsible for creating it
+        # if the directory to save the logs doesen't, this is responsible for creating it.
         if not os.path.exists(f"{LOG_FOLDER_NAME}"):
             os.makedirs(f"{LOG_FOLDER_NAME}")
         # create the log file
@@ -49,7 +49,7 @@ if SAVE_LOGS:
     except:
         raise Exception("Error creating the log folder")
 
-# this function is used to detect what kind of log you wanna use
+# this function is used to detect what kind of log you wanna use.
 def detec_log_lvl(lvl):
     if lvl.lower() == "debug":
         return DEBUG_PREFIX
@@ -64,27 +64,27 @@ def detec_log_lvl(lvl):
     else:
         raise ValueError(f"wrong log level: {lvl}")
 
-# this is the main function, writes the logs on the console and also can write the logs on a file if you put the SAVE_LOGS option True
+# this is the main function, writes the logs on the console and also can write the logs on a file if you put the SAVE_LOGS option True.
 def out(msg="Default log msg", lvl="info", prefix=""):
     # the time of the log
     log_time = datetime.now(pytz.timezone(TIME_ZONE)).strftime(time_format)
     
-    # if the custom prefix is nonexistent, automatically set to nothing
+    # if the custom prefix is nonexistent, automatically set to nothing.
     if len(str(prefix)) <= 0:
         prefix = ""
     else:
         prefix = f"[{prefix}] " 
     
-    # detect what level you wanna use to this specific log
+    # detect what level you wanna use to this specific log.
     log_lvl = detec_log_lvl(lvl)
     
-    # the outpur format
+    # the outpur format.
     output_format = f"[{log_time} {log_lvl}]: {prefix}{msg}"
     
-    # print the log on the console
+    # print the log on the console.
     print(output_format)
     
-    # if SAVE_LOGS is activated also write the log on the file
+    # if SAVE_LOGS is activated also write the log on the file.
     if SAVE_LOGS:
         f.write(output_format + "\n")
         
